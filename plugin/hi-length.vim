@@ -2,7 +2,7 @@
 " Highlight lines that are too long
 "
 
-hi OverLength ctermfg=bg ctermbg=1 guibg=#592929
+hi OverLength ctermbg=1 guibg=#592929
 
 function! ToggleOverLength()
     if exists("g:overlength_match_id")
