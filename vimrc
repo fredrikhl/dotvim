@@ -15,9 +15,10 @@ endfunction
 
 
 " Those pesky files...
-exec 'set backupdir=' . join([s:path . '/backup', '/tmp', '.'], ',')
-exec 'set directory=' . join([s:path . '/swap', '/tmp', '.'], ',')
-exec 'set viminfo+=n' . s:path . '/viminfo'
+exec 'set undodir=' . join([s:path . '/.undo//', '/tmp//', '.'], ',')
+exec 'set backupdir=' . join([s:path . '/.backup//', '/tmp//', '.'], ',')
+exec 'set directory=' . join([s:path . '/.swap//', '/tmp//', '.'], ',')
+exec 'set viminfo+=n' . s:path . '/.viminfo'
 set backup
 
 
