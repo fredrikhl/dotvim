@@ -2,48 +2,19 @@
 " Highlight lines that are too long
 "
 
+hi OverLength ctermfg=bg ctermbg=1 guibg=#592929
 
-" Highlighted({hl})
-"
-" Test if the highlight group 'hl' exists and is not cleared
-"   hl: The highlight group name
-"   return: 1 if group is highlighted, 0 otherwise
-function! Highlighted(hl)
-    if !hlexists(a:hl)
-        return 0
-    endif
-    redir => hlstatus
-        exec "silent hi" a:hl
-    redir END
-    return (hlstatus !~ 'cleared')
-endfunction
-
-
-" ToggleOverLength()
-"
-" Toggle highlight of the hi-group 'OverLength'
-" OverLength is a group of characters in lines longer than 'tw' or 80 chars
 function! ToggleOverLength()
-    if !hlexists('OverLength')
-        hi OverLength None
-    endif
-
-    " Define match rule
-    if Highlighted('OverLength')
-        " Toggle off
-        hi OverLength None
-        echo 'Line length hilight off'
-        return
-    elseif &tw > 1
-        let maxLen=&tw-1
+    if exists("g:overlength_match_id")
+        echo "Line highlight cleared (id=" . g:overlength_match_id . ")"
+        silent! call matchdelete(g:overlength_match_id)
+        unlet g:overlength_match_id
     else
-        let maxLen=80
+        let maxlen=80
+        if &tw > 1
+            let maxlen=&tw-1
+        endif
+        let g:overlength_match_id = matchadd('OverLength', '\%>'.maxlen.'v.\+', 100)
+        echo "Line length highlight after col" maxlen "(id=" . g:overlength_match_id . ")"
     endif
-    " Toggle on
-    let regex='match Overlength /\%>'.maxLen.'v.\+/'
-    exec regex
-    echo 'Line length hilight after col ' . maxLen
-    unlet maxLen regex
-    " TODO: Make the hilight group configurable
-    hi OverLength ctermbg=1 guibg=#592929
 endfunction
