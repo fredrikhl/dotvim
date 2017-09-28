@@ -11,5 +11,5 @@ let Tlist_Inc_Winwidth=0
 if ! ((exists('Tlist_Ctags_Cmd') &&
             \ executable(g:Tlist_Ctags_Cmd)) ||
             \ executable('ctags'))
-    call PathogenDisable('taglist')
+    call PathogenDisable('taglist.vim')
 endif
