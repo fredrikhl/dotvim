@@ -1,4 +1,4 @@
-runtime! autoload/pathogen.vim
+runtime! bundle/pathogen/autoload/pathogen.vim
 
 " path: directory where this file resides (with symlinks resolved)
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
