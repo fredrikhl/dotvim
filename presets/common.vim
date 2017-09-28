@@ -1,6 +1,5 @@
 "
 " Basic, common settings.
-" Can be overloaded in other files
 "
 
 " Override stupid locale
@@ -66,3 +65,36 @@ set title               " alter terminal window title to file name
 set shell=/bin/bash     " Ensure that my prefered shell is used
 set wildignore+=*.so,*.swp,*.zip,*.class,*.exe,*/build/*
 set laststatus=2
+
+
+" Generic augroup
+augroup last_known_cursor
+    autocmd!
+    " For all text files set 'textwidth' to 78 characters.
+    "autocmd FileType text setlocal textwidth=80
+
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     exe "normal g`\"" |
+        \ endif
+augroup END
+
+
+" Limit any cursorline, cursorcolumn to window
+augroup visualcursor
+    autocmd!
+    if &cursorline
+        autocmd WinLeave * set nocursorline
+        autocmd WinEnter * set cursorline
+    endif
+    if &cursorcolumn
+        autocmd WinLeave * set nocursorcolumn
+        autocmd WinEnter * set cursorcolumn
+    endif
+augroup END
+
+
+filetype plugin indent on
