@@ -1,21 +1,24 @@
 runtime! bundle/vim-pathogen/autoload/pathogen.vim
 
 " path: directory where this file resides (with symlinks resolved)
-let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-let s:confdir = s:path . '/common'
-let s:presetdir = s:path . '/presets'
-let s:hostfile = s:path . '/hosts/' . substitute(hostname(), "\\..*", "", "") . '.vim'
+let s:root = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let s:confdir = s:root . '/common'
+let s:presetdir = s:root . '/presets'
+let s:hostfile = s:root . '/hosts/' . substitute(hostname(), "\\..*", "", "") . '.vim'
 
 let s:presets = split($VIM_PRESETS, ':')
 
 
-" Set colorscheme by setting g:colorscheme.
+" This is how we set the colorscheme now.
+" This way, the colorscheme only gets set once, and we can set it to a
+" colorscheme before it is added to runtimepath.
 let g:colorscheme = "default"
 
 
+" source a file if it exists
 function! s:source_if(filename)
     if filereadable(a:filename)
-        exec "source " . a:filename
+        execute 'source' a:filename
     endif
 endfunction
 
@@ -31,11 +34,12 @@ endfunction
 
 
 " Those pesky files...
-exec 'set undodir=' . join([s:path . '/.undo//', '/tmp//', '.'], ',')
-exec 'set backupdir=' . join([s:path . '/.backup//', '/tmp//', '.'], ',')
-exec 'set directory=' . join([s:path . '/.swap//', '/tmp//', '.'], ',')
-exec 'set viminfo+=n' . s:path . '/.viminfo'
+execute 'set undodir=' . join([s:root . '/.undo', '/tmp', '.'], ',')
+set undofile
+execute 'set backupdir=' . join([s:root . '/.backup', '/tmp', '.'], ',')
 set backup
+execute 'set directory=' . join([s:root . '/.swap//', '/tmp//', '.'], ',')
+execute 'set viminfo+=n' . s:root . '/.viminfo'
 
 
 " Load common configs
@@ -64,7 +68,7 @@ if exists('*pathogen#infect()')
 endif
 
 if exists('g:colorscheme')
-    exec "colorscheme " . g:colorscheme
+    execute "colorscheme " . g:colorscheme
 else
     colorscheme default
 endif
