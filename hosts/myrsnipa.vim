@@ -44,6 +44,12 @@ hi IndentGuidesEven ctermfg=239 ctermbg=235
 " Better whitespace
 hi ExtraWhitespace ctermfg=239 ctermbg=236
 
+" spelling
+hi SpellBad   term=underline cterm=underline ctermfg=LightRed
+hi SpellCap   term=underline cterm=underline ctermfg=Yellow
+hi SpellRare  term=underline cterm=underline
+hi SpellLocal term=underline cterm=underline
+
 " Airline
 " let g:airline_theme='molokai'
 let g:airline_theme='onedark'
