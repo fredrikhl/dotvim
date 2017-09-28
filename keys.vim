@@ -73,12 +73,13 @@ function! s:setup_keybinds(force)
         nmap <silent><leader>w :ToggleWhitespace<CR>
     endif
 
-    " l: vimrc.d/hi-length.vim
-    if exists(':ToggleOverLength') || a:force
+    " l: plugin/hi-length.vim
+    if exists('*ToggleOverLength') || a:force
         nnoremap <silent><leader>l :call ToggleOverLength()<CR>
     endif
 
-    if (exists(':DoWindowSwap') && exists(':MarkWindowSwap')) || a:force
+    " y, p: plugin/win-swap.vim
+    if (exists('*DoWindowSwap') && exists('*MarkWindowSwap')) || a:force
         " yank/put window:
         nmap <silent><leader>y :call MarkWindowSwap()<CR>
         nmap <silent><leader>p :call DoWindowSwap()<CR>
