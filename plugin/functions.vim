@@ -21,20 +21,6 @@ function! VimOverCompat()
     return (exists('*InsertCharPre') && exists('*InsertEnter') && exists('*InsertLeave'))
 endfunction
 
-" Add a bundle name to the pathogen_disabled list.
-" Initializes the disabled variable if it doesn't exist.
-"   bundle: The bundle name (folder name in .vim/bundle/)
-function! PathogenDisable(bundle)
-    " Initialize
-    if (!exists('g:pathogen_disabled'))
-        let g:pathogen_disabled = []
-    endif
-    " Add if not in list
-    if (0 > index(g:pathogen_disabled, a:bundle))
-        call add(g:pathogen_disabled, a:bundle)
-    endif
-endfunction
-
 " Dump colors
 function! PrintColors()
     let num = 255
