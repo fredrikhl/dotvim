@@ -65,13 +65,6 @@ call s:source_if(s:path . '/keys.vim')
 " TODO: Where should this go?
 if has("autocmd")
 
-    " Set file extension formats (for syntax and plugins)
-    augroup filetypedetect
-        autocmd BufNewFile,BufRead *.wiki set filetype=Wikipedia
-        autocmd BufNewFile,BufRead *.tpl set filetype=jinja
-        autocmd BufNewFile,BufRead *.applescript set filetype=applescript
-    augroup END
-
     " Limit cursorline, cursorcolumn to window
     augroup visualcursor
         autocmd!
