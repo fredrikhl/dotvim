@@ -20,3 +20,9 @@ augroup custom_colors
     autocmd!
     autocmd ColorScheme * call s:update_colors()
 augroup END
+
+if has('clipboard')
+    inoremap <C-v> <ESC>"+pa
+    vnoremap <C-c> "+y
+    vnoremap <C-d> "+d
+endif
