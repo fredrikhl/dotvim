@@ -8,6 +8,7 @@ let s:hostfile = s:root . '/hosts/' . substitute(hostname(), "\\..*", "", "") . 
 
 let s:presets = split($VIM_PRESETS, ':')
 
+silent! execute 'helptags' s:root . '/doc'
 
 " This is how we set the colorscheme now.
 " This way, the colorscheme only gets set once, and we can set it to a
@@ -46,6 +47,7 @@ execute 'set viminfo+=n' . s:root . '/.viminfo'
 for config in split(globpath(s:confdir, '*.vim'), '\n')
     call s:source_if(config)
 endfor
+
 
 
 " Try to load .vim/presets/<preset>.vim files defined in $VIM_PRESETS

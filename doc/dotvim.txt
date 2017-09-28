@@ -1,0 +1,18 @@
+*dotvim.txt* some dotfiles for vim
+
+====================================================================
+CONTENTS                                            *DotVimContents*
+
+    1. Usage ................ |DotVimUsage|
+    2. Directories .......... |DotVimDirectories|
+
+
+====================================================================
+Section 1: Usage                                       *DotVimUsage*
+
+TODO
+
+====================================================================
+Section 2: Directories                           *DotVimDirectories*
+
+TODO
