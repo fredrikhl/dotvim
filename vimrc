@@ -14,6 +14,12 @@ function! s:source_if(filename)
 endfunction
 
 
+" Those pesky files...
+exec 'set backupdir=' . join([s:path . '/backup', '/tmp', '.'], ',')
+exec 'set directory=' . join([s:path . '/swap', '/tmp', '.'], ',')
+set backup
+
+
 " TODO: Figure out a way to do pre- and post-pathogen stuff
 " Add a bundle name to the pathogen_disabled list.
 "   bundle: name in ./bundle/

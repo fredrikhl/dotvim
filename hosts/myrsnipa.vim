@@ -50,9 +50,6 @@ let g:airline_theme='onedark'
 
 " Local settings (paths, etc...)
 
-" Those pesky files...
-set backupdir=~/.vim/backup//,/tmp//,.
-set directory=~/.vim/swap//,/tmp//,.
 
 " Do not use pylint
 let g:syntastic_python_checkers = ['python', 'flake8']
