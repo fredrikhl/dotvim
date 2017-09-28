@@ -7,6 +7,44 @@ let mapleader = "|"
 let g:slimv_leader = ","
 let g:paredit_leader = ","
 
+
+function! s:update_colors()
+    hi Normal     ctermbg=234
+    hi NonText    ctermbg=233
+    hi CursorLine ctermbg=none
+    hi Visual     ctermbg=238
+
+    hi Pmenu      ctermfg=7 ctermbg=0
+    hi PmenuSel   ctermfg=15 ctermbg=8
+
+    " TODO: Keep the diff bg dark, and keep the fg?
+    hi DiffAdd    term=bold ctermfg=234 ctermbg=151 guifg=bg guibg=#afdfaf
+    hi DiffChange term=bold ctermfg=234 ctermbg=181 guifg=bg guibg=#dfafaf
+    hi DiffDelete term=bold ctermfg=234 ctermbg=246 guifg=bg guibg=#949494
+    hi DiffText   term=reverse ctermfg=234 ctermbg=174 guifg=bg guibg=#df8787
+
+    " IndentGuides
+    " Setting ctermbg=234 sets background=light in some versions of vim
+    hi IndentGuidesOdd ctermfg=237 ctermbg=233
+    hi IndentGuidesEven ctermfg=239 ctermbg=235
+
+    " Better whitespace
+    hi ExtraWhitespace ctermfg=239 ctermbg=236
+
+    " spelling
+    hi SpellBad   term=underline cterm=underline ctermfg=LightRed
+    hi SpellCap   term=underline cterm=underline ctermfg=Yellow
+    hi SpellRare  term=underline cterm=underline
+    hi SpellLocal term=underline cterm=underline
+
+    let g:colors_name = g:colors_name . '-custom'
+endfunction
+
+augroup custom_colors
+    autocmd!
+    autocmd ColorScheme * call s:update_colors()
+augroup END
+
 " Helper functions for vimrc
 " source ~/config/vim/functions.vim
 
@@ -19,36 +57,9 @@ let g:paredit_leader = ","
 
 " let g:markdown_fold_style = 'nested'
 
-" colorscheme xoria256
-colorscheme one
+" let g:colorscheme = 'xoria256'
+let g:colorscheme = 'one'
 
-hi Normal     ctermbg=234
-hi NonText    ctermbg=233
-hi CursorLine ctermbg=none
-hi Visual     ctermbg=238
-
-hi Pmenu      ctermfg=7 ctermbg=0
-hi PmenuSel   ctermfg=15 ctermbg=8
-
-" TODO: Keep the diff bg dark, and keep the fg?
-hi DiffAdd    term=bold ctermfg=234 ctermbg=151 guifg=bg guibg=#afdfaf
-hi DiffChange term=bold ctermfg=234 ctermbg=181 guifg=bg guibg=#dfafaf
-hi DiffDelete term=bold ctermfg=234 ctermbg=246 guifg=bg guibg=#949494
-hi DiffText   term=reverse ctermfg=234 ctermbg=174 guifg=bg guibg=#df8787
-
-" IndentGuides
-" Setting ctermbg=234 sets background=light in some versions of vim
-hi IndentGuidesOdd ctermfg=237 ctermbg=233
-hi IndentGuidesEven ctermfg=239 ctermbg=235
-
-" Better whitespace
-hi ExtraWhitespace ctermfg=239 ctermbg=236
-
-" spelling
-hi SpellBad   term=underline cterm=underline ctermfg=LightRed
-hi SpellCap   term=underline cterm=underline ctermfg=Yellow
-hi SpellRare  term=underline cterm=underline
-hi SpellLocal term=underline cterm=underline
 
 " Airline
 " let g:airline_theme='molokai'

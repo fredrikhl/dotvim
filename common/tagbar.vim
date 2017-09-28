@@ -46,3 +46,10 @@ if executable('markdown2ctags')
         \ 'sort': 0,
     \ }
 endif
+
+
+if ! ((exists('tagbar_ctags_bin') &&
+            \ executable(g:tagbar_ctags_bin)) ||
+            \ executable('ctags'))
+    call PathogenDisable('tagbar')
+endif
