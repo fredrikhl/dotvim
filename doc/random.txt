@@ -1,0 +1,38 @@
+*random.txt* read random text into buffer from /dev/urandom
+
+==============================================================================
+FUNCTIONS                                                            *random#*
+
+random#read({cls}, {num}, {pipe})                              *random#read()*
+
+    Reads bytes from /dev/urandom and filters them through 'tr -d {cls}' until
+    we have '{num}' characters.
+
+    The resulting output can optionally be piped through an additinal command
+    {pipe}.
+
+    Example:
+        :call random#read('[:alnum:]', 10, '')
+
+random#alnum({num})                                           *random#alnum()*
+
+    Reads {num} alphanumeric characters from /dev/urandom into the current
+    buffer.
+
+    Example:
+        :call random#alnum(10)
+
+random#hexbytes({bytes})                                   *random#hexbytes()*
+
+    Reads {num} bytes from /dev/urandom and into the current buffer as 2 *
+    {num} hex character pairs.
+
+    Example:
+        :call random#hexbytes(5)
+
+random#choice({chars}, {num})                              *random#hexbytes()*
+
+    Reads {num} characters from {chars} into the current buffer.
+
+    Example:
+        :call random#hexbytes('abc', 10)
