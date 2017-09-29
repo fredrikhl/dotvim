@@ -68,11 +68,11 @@ call s:source_if(s:hostfile)
 
 
 if exists('*pathogen#infect()')
-    if isdirectory('bundle')
-        call pathogen#infect('bundle/{}')
+    if isdirectory(s:root . '/bundle')
+        call pathogen#infect(s:root . '/bundle/{}')
     endif
-    if isdirectory('bundle.remote')
-        call pathogen#infect('bundle.remote/{}')
+    if isdirectory(s:root . '/bundle.remote')
+        call pathogen#infect(s:root . '/bundle.remote/{}')
     endif
     " call pathogen#infect('custom/{}')
 endif
