@@ -3,6 +3,8 @@
 My vim setup with [pathogen] and [pandemic], with common settings according to
 my preferences, and possibility for different configs for individual hosts.
 
+See [doc/dotvim.txt] for more info.
+
 ## Setup
 
 1. Clone this repo to '~/.vim:
@@ -14,5 +16,6 @@ my preferences, and possibility for different configs for individual hosts.
    bash setup.py
    ```
 
+  [doc/dotvim.txt]: ./blob/master/doc/dotvim.txt
   [pathogen]: https://github.com/tpope/vim-pathogen
   [pandemic]: https://github.com/jwcxz/vim-pandemic
