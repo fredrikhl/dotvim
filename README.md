@@ -16,6 +16,6 @@ See [doc/dotvim.txt] for more info.
    bash setup.py
    ```
 
-  [doc/dotvim.txt]: ./blob/master/doc/dotvim.txt
+  [doc/dotvim.txt]: ./doc/dotvim.txt
   [pathogen]: https://github.com/tpope/vim-pathogen
   [pandemic]: https://github.com/jwcxz/vim-pandemic
