@@ -7,8 +7,10 @@ function! pipecmd#setup(keys, to, from)
             echo 'Command name '.k.a:keys.' taken' | return
         endif
     endfor
-    exec 'command -range Y'.a:keys.' :silent :<line1>,<line2>write '.a:to
-    exec 'cabbrev y'.a:keys.' Y'.a:keys
-    exec 'command -range P'.a:keys.' :silent :<line1>,<line2>delete | read '.a:from
-    exec 'cabbrev p'.a:keys.' P'.a:keys
+    execute 'command -range Y'.a:keys.' :silent :<line1>,<line2>write '.a:to
+    execute 'cabbrev y'.a:keys.' Y'.a:keys
+    "execute 'command -range P'.a:keys.' :silent :<line1>,<line2>delete | read '.a:from
+    execute 'command P'.a:keys.' :silent :read '.a:from
+    execute 'cabbrev p'.a:keys.' P'.a:keys
+
 endfunction
