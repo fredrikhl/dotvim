@@ -1,1 +1,2 @@
+# if there's a pathogen-script in this directory, we don't want it in git.
 pathogen.vim

@@ -1,2 +1,4 @@
+# This folder should hold undo files for vim.
+
 *
 !.gitignore

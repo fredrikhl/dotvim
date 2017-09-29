@@ -1,2 +1,5 @@
+# this folder is intended for keeping 'bundles' that should be automatically
+# loaded with 'pathogen'.
+
 *
 !.gitignore

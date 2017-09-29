@@ -1,2 +1,5 @@
+# this folder is intended for keeping automatically maintained 'bundles',
+# typically with 'pandemic'.
+
 *
 !.gitignore
