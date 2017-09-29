@@ -6,36 +6,72 @@ CONTENTS                                            *DotVimContents*
     1. Usage ................ |DotVimUsage|
     2. Directories .......... |DotVimDirectories|
 
+Todo: Restructure this a bit
+
 
 ====================================================================
 Section 1: Usage                                       *DotVimUsage*
 
-TODO
+Todo: Do we need to document this here?
 
 ====================================================================
 Section 2: Directories                           *DotVimDirectories*
 
 The directory layout of this set of dotfiles looks something like:
 
-    .vim
-    ├── .backup ... |backup|
-    ├── .swap ..... |swap-file|
-    ├── .undo ..... |undodir|
-    ├── autoload .. |autoload|
-    ├── bundle .... |DotVimBundles|
-    ├── common .... |DotVimCommonConfig|
-    ├── doc ....... |help|
-    ├── ftdetect .. |ftdetect|
-    ├── hosts ..... |DotVimHosts|
-    ├── plugin .... |plugin|
-    ├── presets ... |DotVimPresets|
-    ├── snippets .. |DotVimSnippets|
-    └── vimrc ..... |vimrc|
+    .vim/
+    ├─ .backup/ ......... |DotVimHidden|
+    ├─ .env/ ............ |DotVimHidden|
+    ├─ .swap/ ........... |DotVimHidden|
+    ├─ .undo/ ........... |DotVimHidden|
+    ├─ autoload/ ........ |DotVimAutoload|
+    ├─ bundle/ .......... |DotVimBundles|
+    ├─ bundle.remote/ ... |DotVimBundles|
+    ├─ common/ .......... |DotVimCommonConfig|
+    ├─ doc/ ............. |help|
+    ├─ ftdetect/ ........ |ftdetect|
+    ├─ hosts/ ........... |DotVimHosts|
+    ├─ pandemic-bundles . |DotVimBundles|
+    ├─ plugin/ .......... |plugin|
+    ├─ presets/ ......... |DotVimPresets|
+    ├─ snippets/ ........ |DotVimSnippets|
+    └─ vimrc ............ |DotVimRc|
+
+--------------------------------------------------------------------
+Hidden directories                                    *DotVimHidden*
+
+We configure vim to store all temporary files to common directories
+within ~/.vim/
+
+One exception is the .env folder, which is a virtualenv for pandemic
+(see |Bundles|)
+
+See: .backup/ |backup| (`help backup`)
+     .env/    |DotVimBundles|
+     .swap/   |swap-file| (`help swap-file`)
+     .undo/   |undodir| (`help undodir`)
+
+--------------------------------------------------------------------
+Autoload                                            *DotVimAutoload*
+
+Nothing special.
+
+See: `help autoload` |autoload|
 
 --------------------------------------------------------------------
 Bundles                                              *DotVimBundles*
 
-TODO: pathogen, |runtimepath|
+Extra `runtimepath`s, to be loaded with Pathogen.
+Packages can be downloaded and kept up-to-date with Pandemic.
+
+See: `help runtimepath` |runtimepath|
+     Pathogen: https://github.com/tpope/vim-pathogen
+     Pandemic: https://github.com/jwcxz/vim-pandemic
+
+Note: May be replaced with an actual plugin manager, like:
+      * Vundle (https://github.com/VundleVim/Vundle.vim)
+      * dein.vim (https://github.com/Shougo/dein.vim)
+      * vim-plug (https://github.com/junegunn/vim-plug)
 
 --------------------------------------------------------------------
 Common configuration                            *DotVimCommonConfig*
@@ -45,19 +81,40 @@ TODO: Common config files, setup of plugins/bundles...
 --------------------------------------------------------------------
 Host configuration                                     *DotVimHosts*
 
-TODO: About |hostname()| configs
+Configuration for a specific host can be split into separate configs
+and put into ~/.vim/hosts/<label>.vim
+
+If the "least significant" label of the hosts hostname matches a
+file in this directory, the configuration will get sourced.
+
+See: |hostname()| (`help hostname()`)
 
 --------------------------------------------------------------------
-Preset configurations                                *DotVimPresets*
+Preset configurations                 *$VIMPRESETS*  *DotVimPresets*
 
-TODO: $VIM_PRESETS
+This directory contain configuration presets.
+
+To load one or more of the presets, define a ':'-separated string in
+|$VIMPRESETS|. Each matching configuration in this directory will
+get loaded in the order that they appear in |$VIMPRESETS|.
+
+Example: `! export VIMPRESETS='work:unix:color16'`
 
 --------------------------------------------------------------------
 Snipmate snippets                                   *DotVimSnippets*
 
-TODO: snipmate snippets
+Just a directory for storing text snippets.
+
+See: https://github.com/garbas/vim-snipmate
 
 --------------------------------------------------------------------
 vimrc                                                     *DotVimRc*
 
-TODO: main config, order of execution
+The main configuration. Everything here is global, and applies to
+all hosts using this setup.
+
+Todo:
+  * Document what this does
+  * Document what order things gets sourced in.
+
+See: |vimrc| (`help vimrc`)

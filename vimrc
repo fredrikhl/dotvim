@@ -1,4 +1,7 @@
-runtime! bundle/vim-pathogen/autoload/pathogen.vim
+runtime
+            \ bundle.remote/vim-pathogen/autoload/pathogen.vim
+            \ bundle/vim-pathogen/autoload/pathogen.vim
+            \ autoload/pathogen.vim
 
 " path: directory where this file resides (with symlinks resolved)
 let s:root = fnamemodify(resolve(expand('<sfile>:p')), ':h')
@@ -6,7 +9,7 @@ let s:confdir = s:root . '/common'
 let s:presetdir = s:root . '/presets'
 let s:hostfile = s:root . '/hosts/' . substitute(hostname(), "\\..*", "", "") . '.vim'
 
-let s:presets = split($VIM_PRESETS, ':')
+let s:presets = split($VIMPRESETS, ':')
 
 silent! execute 'helptags' s:root . '/doc'
 
@@ -50,8 +53,8 @@ endfor
 
 
 
-" Try to load .vim/presets/<preset>.vim files defined in $VIM_PRESETS
-" This allows e.g. a `export VIM_PRESET=work:linux:foo` in .bashrc
+" Try to load .vim/presets/<preset>.vim files defined in $VIMPRESETS
+" This allows e.g. a `export VIMPRESET=work:linux:foo` in .bashrc
 if len(s:presets) < 1
     call add(s:presets, 'common')
 endif
@@ -65,7 +68,12 @@ call s:source_if(s:hostfile)
 
 
 if exists('*pathogen#infect()')
-    call pathogen#infect()
+    if isdirectory('bundle')
+        call pathogen#infect('bundle/{}')
+    endif
+    if isdirectory('bundle.remote')
+        call pathogen#infect('bundle.remote/{}')
+    endif
     " call pathogen#infect('custom/{}')
 endif
 
