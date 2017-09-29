@@ -15,4 +15,49 @@ TODO
 ====================================================================
 Section 2: Directories                           *DotVimDirectories*
 
-TODO
+The directory layout of this set of dotfiles looks something like:
+
+    .vim
+    ├── .backup ... |backup|
+    ├── .swap ..... |swap-file|
+    ├── .undo ..... |undodir|
+    ├── autoload .. |autoload|
+    ├── bundle .... |DotVimBundles|
+    ├── common .... |DotVimCommonConfig|
+    ├── doc ....... |help|
+    ├── ftdetect .. |ftdetect|
+    ├── hosts ..... |DotVimHosts|
+    ├── plugin .... |plugin|
+    ├── presets ... |DotVimPresets|
+    ├── snippets .. |DotVimSnippets|
+    └── vimrc ..... |vimrc|
+
+--------------------------------------------------------------------
+Bundles                                              *DotVimBundles*
+
+TODO: pathogen, |runtimepath|
+
+--------------------------------------------------------------------
+Common configuration                            *DotVimCommonConfig*
+
+TODO: Common config files, setup of plugins/bundles...
+
+--------------------------------------------------------------------
+Host configuration                                     *DotVimHosts*
+
+TODO: About |hostname()| configs
+
+--------------------------------------------------------------------
+Preset configurations                                *DotVimPresets*
+
+TODO: $VIM_PRESETS
+
+--------------------------------------------------------------------
+Snipmate snippets                                   *DotVimSnippets*
+
+TODO: snipmate snippets
+
+--------------------------------------------------------------------
+vimrc                                                     *DotVimRc*
+
+TODO: main config, order of execution
