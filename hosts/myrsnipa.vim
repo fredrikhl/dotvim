@@ -7,7 +7,10 @@ let mapleader = "|"
 let g:slimv_leader = ","
 let g:paredit_leader = ","
 
+" basic settings
+set listchars=tab:⇥\ ,
 
+" custom colors / color fixes
 function! s:update_colors()
     hi Normal     ctermbg=234
     hi NonText    ctermbg=233
@@ -37,6 +40,10 @@ function! s:update_colors()
     hi SpellRare  term=underline cterm=underline
     hi SpellLocal term=underline cterm=underline
 
+    if ! exists('g:colors_name')
+        " incidate that no theme was set?
+        let g:colors_name = '<none>'
+    endif
     let g:colors_name = g:colors_name . '-custom'
 endfunction
 
@@ -45,37 +52,24 @@ augroup custom_colors
     autocmd ColorScheme * call s:update_colors()
 augroup END
 
-" Helper functions for vimrc
-" source ~/config/vim/functions.vim
-
-" Disable pathogen bundles BEFORE vimrc is loaded
-" The disable list does not actually depend on pathogen
-"
-" Disable pyflakes, we try to use syntastic
 "call PathogenDisable('pyflakes')
 "call PathogenDisable('vim-over')
-
 " let g:markdown_fold_style = 'nested'
 
 " let g:colorscheme = 'xoria256'
 let g:colorscheme = 'one'
 
-
-" Airline
 " let g:airline_theme='molokai'
 let g:airline_theme='onedark'
 
-" Local settings (paths, etc...)
-
-
-" Do not use pylint
+" do not use pylint
 let g:syntastic_python_checkers = ['python', 'flake8']
 
-" TMP: Quiet tab warning
+" php: quiet tab warnings for files that uses tabs
 let g:syntastic_php_phpcs_quiet_messages = { "regex": "Spaces must be used .*; tabs are not allowed" }
 
-" TMP: Java checkstyle checks for SUN
+" Java: checkstyle, with SUN codestyle
 let g:syntastic_java_checkers = ['checkstyle']
+" let g:syntastic_java_checkstyle_classpath = '~/scripts/jar/checkstyle-5.5-all.jar'
 let g:syntastic_java_checkstyle_conf_file = '/usr/share/doc/checkstyle/sun_checks.xml'
-let g:syntastic_java_checkstyle_classpath = '/home/fhl/scripts/jar/checkstyle-5.5-all.jar'
-set listchars=tab:⇥\ ,
+" let g:syntastic_java_checkstyle_conf_file = '/usr/share/doc/checkstyle/google_checks.xml'
