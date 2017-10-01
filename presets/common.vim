@@ -62,6 +62,7 @@ set cursorline
 " set cursorcolumn
 set laststatus=2
 set list
+" set listchars=tab:→\ ,nbsp:·,
 set listchars=tab:→\ ,
 set number
 set ruler

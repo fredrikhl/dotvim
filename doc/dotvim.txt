@@ -36,8 +36,8 @@ The directory layout of this set of dotfiles looks something like:
 --------------------------------------------------------------------
 Section 1.1: Temporary files                          *DotVimHidden*
 
-We configure vim to store all temporary files to common directories
-within ~/.vim/
+We configure vim to store all turds/temporary files to common
+directories within ~/.vim/
 
 See: .backup/ |backup| (`help backup`)
      .swap/   |swap-file| (`help swap-file`)

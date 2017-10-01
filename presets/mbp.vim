@@ -22,7 +22,10 @@ augroup custom_colors
 augroup END
 
 if has('clipboard')
-    inoremap <C-v> <ESC>"+pa
+    " don't need i_^V, as regular cmd+p should to the same thing. It's really
+    " the yank to clipboard we need...  Also, we don't want to replace the
+    " original i_^V
+    " inoremap <C-v> <ESC>"+pa
     vnoremap <C-c> "+y
     vnoremap <C-d> "+d
 endif
