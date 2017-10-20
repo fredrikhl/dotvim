@@ -17,3 +17,6 @@ fi
 
 .env/bin/pip install -U "$PANDEMIC_SOURCE" || die "Unable to install pandemic"
 .env/bin/pandemic update || die "Unable to update packages"
+
+# update helptags with pathogen
+vim -c Helptags -c quit
