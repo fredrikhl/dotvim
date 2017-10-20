@@ -1,8 +1,18 @@
+#
+# Plugins
+#
+
+[vim-pathogen]
+source = https://github.com/tpope/vim-pathogen.git
+type = git
+
 [visual-split]
+# create a split focused on selection with ':VSSplit'
 source = https://github.com/wellle/visual-split.vim.git
 type = git
 
 [ack.vim]
+# provides ':Ack [opts] <pattern> [directories…]'
 source = https://github.com/mileszs/ack.vim.git
 type = git
 
@@ -10,28 +20,8 @@ type = git
 source = https://github.com/bling/vim-airline.git
 type = git
 
-[vim-airline-themes]
-source = https://github.com/vim-airline/vim-airline-themes.git
-type = git
-
-[apiblueprint.vim]
-source = https://github.com/kylef/apiblueprint.vim.git
-type = git
-
-[badwolf]
-source = https://github.com/sjl/badwolf.git
-type = git
-
-[base16-vim]
-source = https://github.com/chriskempson/base16-vim
-type = git
-
 [better-whitespace]
 source = https://github.com/ntpeters/vim-better-whitespace.git
-type = git
-
-[csv.vim]
-source = https://github.com/chrisbra/csv.vim.git
 type = git
 
 [ctrlp.vim]
@@ -46,10 +36,6 @@ type = git
 source = https://github.com/vim-scripts/DrawIt.git
 type = git
 
-[elm-vim]
-source = https://github.com/ElmCast/elm-vim.git
-type = git
-
 [vim-fugitive]
 source = https://github.com/tpope/vim-fugitive.git
 type = git
@@ -62,8 +48,58 @@ type = git
 # source = https://github.com/davidhalter/jedi-vim.git
 # type = git
 
-[jellybeans.vim]
-source = https://github.com/nanotech/jellybeans.vim.git
+[vim-over]
+source = https://github.com/osyo-manga/vim-over.git
+type = git
+
+# [vim-snipmate]
+# source = https://github.com/garbas/vim-snipmate.git
+# type = git
+
+[supertab]
+source = https://github.com/ervandew/supertab.git
+type = git
+
+[tagbar]
+source = git://github.com/majutsushi/tagbar.git
+type = git
+
+# [taglist.vim]
+# source = https://github.com/vim-scripts/taglist.vim.git
+# type = git
+
+[slimv]
+# lisp-mode with repl
+source = https://github.com/kovisoft/slimv.git
+type = git
+
+[vim-surround]
+source = https://github.com/tpope/vim-surround.git
+type = git
+
+[syntastic]
+source = https://github.com/scrooloose/syntastic.git
+type = git
+
+[virtualenv]
+source = https://github.com/jmcantrell/vim-virtualenv.git
+type = git
+
+
+#
+# Filetypes
+#
+
+[apiblueprint.vim]
+source = https://github.com/kylef/apiblueprint.vim.git
+type = git
+
+[csv.vim]
+source = https://github.com/chrisbra/csv.vim.git
+type = git
+
+[elm-vim]
+source = https://github.com/ElmCast/elm-vim.git
 type = git
 
 [jenkinsfile-vim-syntax]
@@ -90,60 +126,12 @@ type = git
 source = https://github.com/chikamichi/mediawiki.vim.git
 type = git
 
-[molokai]
-source = https://github.com/tomasr/molokai.git
-type = git
-
-[vim-one]
-source = https://github.com/rakr/vim-one.git
-type = git
-
-[vim-over]
-source = https://github.com/osyo-manga/vim-over.git
-type = git
-
-[vim-pathogen]
-source = https://github.com/tpope/vim-pathogen.git
-type = git
-
 [vim-ps1]
 source = https://github.com/PProvost/vim-ps1.git
 type = git
 
 [vim-python-pep8-indent]
 source = https://github.com/hynek/vim-python-pep8-indent.git
-type = git
-
-[slimv]
-source = https://github.com/kovisoft/slimv.git
-type = git
-
-# [vim-snipmate]
-# source = https://github.com/garbas/vim-snipmate.git
-# type = git
-
-[supertab]
-source = https://github.com/ervandew/supertab.git
-type = git
-
-[vim-surround]
-source = https://github.com/tpope/vim-surround.git
-type = git
-
-[syntastic]
-source = https://github.com/scrooloose/syntastic.git
-type = git
-
-[tagbar]
-source = git://github.com/majutsushi/tagbar.git
-type = git
-
-[taglist.vim]
-source = https://github.com/vim-scripts/taglist.vim.git
-type = git
-
-[tender.vim]
-source = https://github.com/jacoborus/tender.vim.git
 type = git
 
 [vim-less]
@@ -154,10 +142,40 @@ type = git
 source = https://github.com/superbrothers/vim-vimperator.git
 type = git
 
-[virtualenv]
-source = https://github.com/jmcantrell/vim-virtualenv.git
+
+#
+# Color schemes
+#
+
+[vim-airline-themes]
+source = https://github.com/vim-airline/vim-airline-themes.git
+type = git
+
+[badwolf]
+source = https://github.com/sjl/badwolf.git
+type = git
+
+[base16-vim]
+source = https://github.com/chriskempson/base16-vim
+type = git
+
+[jellybeans.vim]
+source = https://github.com/nanotech/jellybeans.vim.git
+type = git
+
+[molokai]
+source = https://github.com/tomasr/molokai.git
+type = git
+
+[vim-one]
+source = https://github.com/rakr/vim-one.git
+type = git
+
+[tender.vim]
+source = https://github.com/jacoborus/tender.vim.git
 type = git
 
 [xoria256.vim]
 source = https://github.com/vim-scripts/xoria256.vim.git
 type = git
+
