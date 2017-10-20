@@ -11,7 +11,7 @@ let s:hostfile = s:root . '/hosts/' . substitute(hostname(), "\\..*", "", "") . 
 
 let s:presets = split($VIMPRESETS, ':')
 
-silent! execute 'helptags' s:root . '/doc'
+" silent! execute 'helptags' s:root . '/doc'
 
 " This is how we set the colorscheme now.
 " This way, the colorscheme only gets set once, and we can set it to a
@@ -74,7 +74,6 @@ if exists('*pathogen#infect()')
     if isdirectory(s:root . '/bundle.remote')
         call pathogen#infect(s:root . '/bundle.remote/{}')
     endif
-    " call pathogen#infect('custom/{}')
 endif
 
 if exists('g:colorscheme')
