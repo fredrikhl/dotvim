@@ -94,6 +94,10 @@ type = git
 source = https://github.com/kylef/apiblueprint.vim.git
 type = git
 
+[vim-coffee-script]
+source = https://github.com/kchmck/vim-coffee-script.git
+type = git
+
 [csv.vim]
 source = https://github.com/chrisbra/csv.vim.git
 type = git
@@ -110,8 +114,17 @@ type = git
 source = https://github.com/lepture/vim-jinja.git
 type = git
 
+[vim-less]
+# less-css
+source = https://github.com/groenewege/vim-less.git
+type = git
+
 [logstash.vim]
 source = https://github.com/robbles/logstash.vim.git
+type = git
+
+[typescript-vim]
+source = https://github.com/leafgarland/typescript-vim.git
 type = git
 
 [vim-markdown]
@@ -132,10 +145,6 @@ type = git
 
 [vim-python-pep8-indent]
 source = https://github.com/hynek/vim-python-pep8-indent.git
-type = git
-
-[vim-less]
-source = https://github.com/groenewege/vim-less.git
 type = git
 
 [vimperator]
