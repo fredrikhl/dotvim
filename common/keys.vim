@@ -90,6 +90,11 @@ function! s:setup_keybinds(force)
         nnoremap <silent><leader><Up> :call MarkWindowSwap()<CR><C-w>k :call DoWindowSwap()<CR>
         nnoremap <silent><leader><Right> :call MarkWindowSwap()<CR><C-w>l :call DoWindowSwap()<CR>
     endif
+
+    " g: git-gutter
+    if exists(':GitGutterToggle')  || a:force
+        nmap <silent><leader>g :GitGutterToggle<CR>
+    endif
 endfunction
 
 
