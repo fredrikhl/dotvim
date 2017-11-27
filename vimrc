@@ -6,12 +6,10 @@ runtime
 " path: directory where this file resides (with symlinks resolved)
 let s:root = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:confdir = s:root . '/common'
+let s:hostdir = s:root . '/hosts'
 let s:presetdir = s:root . '/presets'
-let s:hostfile = s:root . '/hosts/' . substitute(hostname(), "\\..*", "", "") . '.vim'
 
 let s:presets = split($VIMPRESETS, ':')
-
-" silent! execute 'helptags' s:root . '/doc'
 
 " This is how we set the colorscheme now.
 " This way, the colorscheme only gets set once, and we can set it to a
@@ -48,23 +46,23 @@ execute 'set viminfo+=n' . s:root . '/.viminfo'
 
 " Load common configs
 for config in split(globpath(s:confdir, '*.vim'), '\n')
-    call s:source_if(config)
+    execute 'source' config
 endfor
-
 
 
 " Try to load .vim/presets/<preset>.vim files defined in $VIMPRESETS
 " This allows e.g. a `export VIMPRESET=work:linux:foo` in .bashrc
-if len(s:presets) < 1
-    call add(s:presets, 'common')
-endif
 for preset in s:presets
     call s:source_if(s:presetdir . '/' . preset . '.vim')
 endfor
 
 
 " Try to load a .vim/hosts/<hostname>.vim
-call s:source_if(s:hostfile)
+for config in split(globpath(s:hostdir, '*.vim'), '\n')
+    if hostname() =~ fnamemodify(config, ':t:r')
+        execute 'source' config
+    endif
+endfor
 
 
 if exists('*pathogen#infect()')
