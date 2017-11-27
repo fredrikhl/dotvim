@@ -19,18 +19,22 @@ The directory layout of this set of dotfiles looks something like:
     ├─ .env/ ............ |DotVimPandemic|
     ├─ .swap/ ........... |DotVimHidden|
     ├─ .undo/ ........... |DotVimHidden|
-    ├─ autoload/ ........ |autoload| (`help autoload`)
+    ├─ autoload/ ........ |DotVimPlugin|
     ├─ bundle/ .......... |DotVimBundles|
     ├─ bundle.remote/ ... |DotVimBundles|
     ├─ common/ .......... |DotVimCommonConfig|
-    ├─ doc/ ............. |help| (`help help`)
-    ├─ ftdetect/ ........ |ftdetect| (`help ftdetect`)
+    ├─ doc/ ............. |DotVimPlugin|
+    ├─ ftdetect/ ........ |DotVimPlugin|
     ├─ hosts/ ........... |DotVimHosts|
     ├─ pandemic-bundles . |DotVimPandemic|
-    ├─ plugin/ .......... |plugin| (`help plugin`)
+    ├─ plugin/ .......... |DotVimPlugin|
     ├─ presets/ ......... |DotVimPresets|
+    ├─ setup.sh ......... |DotVimPandemic|
     ├─ snippets/ ........ |DotVimSnippets|
-    └─ vimrc ............ |DotVimRc|
+    └─ vimrc ............ |DotVimConfigure|
+
+Todo: Figure out if it's possible to link to helptags outside of
+      this file?
 
 
 --------------------------------------------------------------------
@@ -51,6 +55,20 @@ If pathogen can be found (in autoload, or a bundle directory), it
 will be loaded and in sequence add paths from `bundle` and
 `bundle.remote` to the runtimepath.
 
+The `bundle` directory is intended to hold _local_ vim bundles,
+while the `bundle.remote` holds bundles that are managed by
+Pandemic.
+
+Want to install a package?
+
+  If it's for testing out, or something you only need on one specific
+  host, just clone it to the `bundles` directory, and let Pathogen
+  autoload it. Remember to run `:Helptags` (vim -c Helptags -c quit)
+  to get access to any documentation that comes with the bundle.
+
+  If it's something you want in all your vim environments, add it to
+  `pandemic-bundles` and run `setup.sh`.
+
 Todo: Look into using another plugin manager?
 
   * Vundle (https://github.com/VundleVim/Vundle.vim)
@@ -63,7 +81,9 @@ See: |runtimepath| (`help runtimepath`)
 --------------------------------------------------------------------
 Section 2.1: Pathogen                               *DotVimPathogen*
 
-Todo: Document pathogen setup
+If pathogen can be found (in autoload, or a bundle directory), it
+will be loaded and in sequence add paths from `bundle` and
+`bundle.remote` to the runtimepath.
 
 See: https://github.com/tpope/vim-pathogen
 
@@ -71,7 +91,19 @@ See: https://github.com/tpope/vim-pathogen
 --------------------------------------------------------------------
 Section 2.2: Pandemic                               *DotVimPandemic*
 
-Todo: Document pandemic setup
+Everything in `bundle.remote` is handled by Pandemic. The file
+`pandemic-bundles` contains a list of common plugins to install and
+keep up to date.
+
+Pandemic is a python package and script, so we install it in its own
+virtualenv, `.env`.
+
+The script `setup.sh` will:
+
+1. Make sure Pandemic is installed in `.env`, and up to date.
+2. Update all bundles in `bundle.remote` using the `pandemic-bundles`
+   config.
+3. Update helptags using the Pathogen `:Helptags` command.
 
 See: https://github.com/jwcxz/vim-pandemic
 
@@ -79,31 +111,24 @@ See: https://github.com/jwcxz/vim-pandemic
 ====================================================================
 Section 3: Customize                               *DotVimConfigure*
 
-Todo: introduction
+Vim settings are split into multiple, smaller vim-files. The
+~/.vim/vimrc sets up swap/backup turds (see |DotVimHidden|), and then
+sources files from the following directories, in order:
+
+1. ~/.vim/common   |DotVimCommonConfig|
+2. ~/.vim/presets  |DotVimPresets|
+3. ~/.vim/hosts    |DotVimHosts|
 
 
 --------------------------------------------------------------------
 Section 3.1: Common configuration               *DotVimCommonConfig*
 
-Todo: Common config files, setup of plugins/bundles...
+All `*.vim' files in in ~/.vim/common gets sourced, no matter what.
+If you want to set a common setting, set it there.
 
 
 --------------------------------------------------------------------
-Section 3.2: Host configuration                        *DotVimHosts*
-
-Configuration for a specific host can be split into separate configs
-and put into ~/.vim/hosts/<label>.vim
-
-If the "least significant" label of the hosts hostname matches a
-file in this directory, the configuration will get sourced.
-
-Todo: Implement better hostname matching.
-
-See: |hostname()| (`help hostname()`)
-
-
---------------------------------------------------------------------
-Section 3.3: Preset configurations                   *DotVimPresets*
+Section 3.2: Preset configurations                   *DotVimPresets*
 
 This directory contain configuration presets.
 
@@ -117,21 +142,60 @@ in the environment variable |$VIMPRESETS|.
 Example: `! export VIMPRESETS='work:unix:color16'`
 
 
+--------------------------------------------------------------------
+Section 3.3: Host configuration                        *DotVimHosts*
+
+Configuration for a specific host can be split into separate configs
+and put into ~/.vim/hosts/<hostname>.vim
+
+If the output of `hostname()` contains `<hostname>`, the config is
+loaded (`hostname() =~ <hostname>`).
+
+This means that the <hostname> can be the FQDN of the host, or just a
+label. If the hostname is 'myhost.example.org', any of the following
+files should match:
+
+- myhost.example.org.vim
+- myhost.example.vim
+- example.org.vim
+- myhost.vim
+
+Unfortunately, so will:
+
+- host.example.vim
+- h.vim
+
+Todo: Implement better hostname matching
+
+
+See: |hostname()| (`help hostname()`)
+
+
 ====================================================================
 Section 4: Other stuff                                 *DotVimOther*
 
 
 --------------------------------------------------------------------
-Section 4.1: vimrc                                        *DotVimRc*
+Section 4.1: Plugins                                  *DotVimPlugin*
 
-The main configuration. Everything here is global, and applies to
-all hosts using this setup.
+All 3rd party plugins are basically added as `bundles` using Pathogen.
+This frees up the vim plugin directory structure so that we can use them as
+intended, but for our own functionality.
 
-Todo:
-  * Document what this does
-  * Document what order things gets sourced in.
+- autoload
+- colors
+- compiler
+- ftplugin
+- indent
+- keymap
+- lang
+- macros
+- plugin
+- tools
+- tutor
 
-See: |vimrc| (`help vimrc`)
+These folders now contains custom plugins that are bundled with this dotvim
+setup.
 
 
 --------------------------------------------------------------------
