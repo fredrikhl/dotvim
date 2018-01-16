@@ -37,6 +37,12 @@ nnoremap <F1> <nop>" Remove F1 help-shortcut
 " Clear search hilights
 nnoremap <silent><Space> :silent noh<Bar>echo<CR>
 
+" Navigate errors
+nnoremap <C-n>n :lnext<CR>
+nnoremap <C-n>p :lprev<CR>
+
+
+
 "
 " Addon-keys
 "
@@ -66,6 +72,11 @@ function! s:setup_keybinds(force)
     " i: indent-guides
     if exists(':IndentGuidesToggle') || a:force
         nmap <silent><leader>i :IndentGuidesToggle<CR>
+    endif
+
+    " u: undotree
+    if exists(':UndotreeToggle') || a:force
+        nmap <silent><leader>u :UndotreeToggle<CR>
     endif
 
     " w: better-whitespace
