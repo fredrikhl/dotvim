@@ -55,6 +55,11 @@ set expandtab
 set autoindent
 set shiftwidth=0
 
+" popup menu (completion)
+"
+set pumheight=10
+" set pumwidth=15
+
 
 " visual stuff
 "
