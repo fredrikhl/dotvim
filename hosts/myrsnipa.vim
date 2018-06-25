@@ -54,6 +54,7 @@ augroup END
 
 "call PathogenDisable('pyflakes')
 "call PathogenDisable('vim-over')
+call PathogenDisable('YouCompleteMe')
 " let g:markdown_fold_style = 'nested'
 
 " let g:colorscheme = 'xoria256'
