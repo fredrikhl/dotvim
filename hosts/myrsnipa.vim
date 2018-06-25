@@ -65,6 +65,10 @@ let g:airline_theme='onedark'
 
 " do not use pylint
 let g:syntastic_python_checkers = ['python', 'flake8']
+let g:py_python2_flake8 = 'flake8-2.7'
+let g:py_python3_flake8 = 'flake8-3.6'
+" use python2 by default
+call py#set_py2()
 
 " php: quiet tab warnings for files that uses tabs
 let g:syntastic_php_phpcs_quiet_messages = { "regex": "Spaces must be used .*; tabs are not allowed" }
@@ -74,3 +78,4 @@ let g:syntastic_java_checkers = ['checkstyle']
 " let g:syntastic_java_checkstyle_classpath = '~/scripts/jar/checkstyle-5.5-all.jar'
 let g:syntastic_java_checkstyle_conf_file = '/usr/share/doc/checkstyle/sun_checks.xml'
 " let g:syntastic_java_checkstyle_conf_file = '/usr/share/doc/checkstyle/google_checks.xml'
+
