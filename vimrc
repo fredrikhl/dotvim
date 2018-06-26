@@ -17,6 +17,16 @@ let s:presets = split($VIMPRESETS, ':')
 let g:colorscheme = "default"
 
 
+" set colorscheme according to g:colorscheme
+function! s:set_colorscheme()
+    if exists('g:colorscheme')
+        execute "colorscheme " . g:colorscheme
+    else
+        colorscheme default
+    endif
+endfunction
+
+
 " source a file if it exists
 function! s:source_if(filename)
     if filereadable(a:filename)
@@ -25,6 +35,7 @@ function! s:source_if(filename)
 endfunction
 
 
+" add a bundle to the pathogen_disabled list
 function! PathogenDisable(bundle)
     if (!exists('g:pathogen_disabled'))
         let g:pathogen_disabled = []
@@ -33,6 +44,17 @@ function! PathogenDisable(bundle)
         call add(g:pathogen_disabled, a:bundle)
     endif
 endfunction
+
+
+" noop hook - in case nothing else registers autocommands
+function! s:noop()
+endfunction
+
+augroup vimrc_hooks
+    autocmd!
+    autocmd User DotVimBeforePathogen call s:noop()
+    autocmd User DotVimAfterPathogen call s:noop()
+augroup END
 
 
 " Those pesky files...
@@ -65,6 +87,10 @@ for config in split(globpath(s:hostdir, '*.vim'), '\n')
 endfor
 
 
+" call hooks before calling pathogen#infect
+doautocmd User DotVimBeforePathogen
+
+" run pathogen infect to populate the runtime path
 if exists('*pathogen#infect()')
     if isdirectory(s:root . '/bundle')
         call pathogen#infect(s:root . '/bundle/{}')
@@ -74,8 +100,8 @@ if exists('*pathogen#infect()')
     endif
 endif
 
-if exists('g:colorscheme')
-    execute "colorscheme " . g:colorscheme
-else
-    colorscheme default
-endif
+" call hooks after calling pathogen#infect
+doautocmd User DotVimAfterPathogen
+
+
+call s:set_colorscheme()
