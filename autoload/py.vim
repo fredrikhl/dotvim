@@ -1,6 +1,6 @@
-" Configure python versions
-
-" defaults
+" Configure python binaries for syntastic
+"
+" This is a hack that lets us swap the python binaries.
 
 function! s:set_default(varname, default)
     let l:varname = 'g:py_' . a:varname
@@ -9,16 +9,40 @@ function! s:set_default(varname, default)
     endif
 endfunction
 
-" TODO: Overload the IsAvailable methods so that we can use
-"   python<version> -m <checker>?
-" function! SyntaxCheckers_python_python_IsAvailable() dict
-"     if !executable(self.getExec())
-"         return 0
-"     endif
-"     return syntastic#util#versionIsAtLeast(self.getVersion(), [2, 6])
-" endfunction
+" TODO:
+" Provide custom IsAvailable functions, so we can change the executables to
+" `python -m <module>`.
+"
+"   function! SyntaxCheckers_python_python_IsAvailable() dict
+"       if !executable(self.getExec())
+"           return 0
+"       endif
+"       return syntastic#util#versionIsAtLeast(self.getVersion(), [2, 6])
+"   endfunction
 
 
+" TODO:
+" Make all this into a dict, so we can have an arbitrary amount of
+" named setups:
+"
+"   py_versions = {
+"     py2 = {
+"       python = python2,
+"       flake8 = flake8-2.7,
+"     },
+"     py3 = { ...},
+"   }
+"
+" And can swap with a single function call:
+"
+"   call py#set_version('py2')
+"
+" existing setups should be in a stack, so we can call
+"
+"   call py#clear_version()
+"
+" to revert to any settings that were set before the call
+"
 call s:set_default('python2_python', 'python')
 call s:set_default('python2_flake8', 'flake8')
 call s:set_default('python2_pyflakes', 'pyflakes')
@@ -33,8 +57,6 @@ call s:set_default('python3_pep8', 'python3-pep8')
 call s:set_default('python3_pycodestyle', 'python3-pycodestyle')
 call s:set_default('python3_pylint', 'python3-pylint')
 
-" TODO: can we make our own autocmd event? That might be a better way to
-" configure python executables individually for plugins
 
 " TODO: Move to syntastic config?
 function! s:set_py2()
@@ -65,10 +87,14 @@ function! s:unset_py()
 endfunction
 
 
+" TODO: A FileType autocmd that tries to figure out which version the buffer
+" uses and changes version?
+
 augroup set_python
-    autocmd! User SetPython2 call s:set_py2()
-    autocmd! User SetPython3 call s:set_py3()
-    autocmd! User UnsetPython call s:unset_py()
+    autocmd!
+    autocmd User SetPython2 call s:set_py2()
+    autocmd User SetPython3 call s:set_py3()
+    autocmd User UnsetPython call s:unset_py()
 augroup END
 
 
