@@ -18,9 +18,9 @@
 
 " Opening/swapping tabs
 nmap <C-t> :tabnew<CR>
-nmap <C-j> :tabp<CR>
+" nmap <C-j> :tabp<CR>
 nmap <A-Left> :tabp<CR>
-nmap <C-k> :tabn<CR>
+" nmap <C-k> :tabn<CR>
 nmap <A-Right> :tabn<CR>
 
 " Movement between windows/splits
@@ -42,11 +42,22 @@ nnoremap <C-n>n :lnext<CR>
 nnoremap <C-n>p :lprev<CR>
 
 
+"
+" Keybinds that needs <leader>
+" <leader> will mostly be set up *after* this script, so we delay setting them
+" up
+"
+function! s:setup_leader_binds()
+    " vim-or-vigor #4 jet pack
+    " list buffer and prepare to change
+    nnoremap <leader>b :ls<CR>:buffer<space>
+endfunction
+
 
 "
 " Addon-keys
 "
-function! s:setup_keybinds(force)
+function! s:setup_addon_binds(force)
     " o: vim-over
     if exists(':OverCommandLine') || a:force
         noremap <silent><leader>o :OverCommandLine<CR>
@@ -106,6 +117,12 @@ function! s:setup_keybinds(force)
     if exists(':GitGutterToggle')  || a:force
         nmap <silent><leader>g :GitGutterToggle<CR>
     endif
+endfunction
+
+
+function! s:setup_keybinds(force)
+    call s:setup_leader_binds()
+    call s:setup_addon_binds(a:force)
 endfunction
 
 
