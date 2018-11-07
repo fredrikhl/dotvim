@@ -12,39 +12,59 @@ set listchars=tab:⇥\ ,
 
 " custom colors / color fixes
 function! s:update_colors()
-    hi Normal     ctermbg=234
-    hi NonText    ctermbg=233
-    hi CursorLine ctermbg=none
-    hi Visual     ctermbg=238
+    if &background == "dark"
+        hi Normal     ctermbg=234
+        hi NonText    ctermbg=233
+        hi CursorLine ctermbg=none
+        hi Visual     ctermbg=238
 
-    hi Pmenu      ctermfg=7 ctermbg=0
-    hi PmenuSel   ctermfg=15 ctermbg=8
+        hi Pmenu      ctermfg=7 ctermbg=0
+        hi PmenuSel   ctermfg=15 ctermbg=8
 
-    " TODO: Keep the diff bg dark, and keep the fg?
-    hi DiffAdd    term=bold ctermfg=234 ctermbg=151 guifg=bg guibg=#afdfaf
-    hi DiffChange term=bold ctermfg=234 ctermbg=181 guifg=bg guibg=#dfafaf
-    hi DiffDelete term=bold ctermfg=234 ctermbg=246 guifg=bg guibg=#949494
-    hi DiffText   term=reverse ctermfg=234 ctermbg=174 guifg=bg guibg=#df8787
+        " TODO: Keep the diff bg dark, and keep the fg?
+        hi DiffAdd    term=bold ctermfg=234 ctermbg=151 guifg=bg guibg=#afdfaf
+        hi DiffChange term=bold ctermfg=234 ctermbg=181 guifg=bg guibg=#dfafaf
+        hi DiffDelete term=bold ctermfg=234 ctermbg=246 guifg=bg guibg=#949494
+        hi DiffText   term=reverse ctermfg=234 ctermbg=174 guifg=bg guibg=#df8787
 
-    " IndentGuides
-    " Setting ctermbg=234 sets background=light in some versions of vim
-    hi IndentGuidesOdd ctermfg=237 ctermbg=233
-    hi IndentGuidesEven ctermfg=239 ctermbg=235
+        " IndentGuides
+        " Setting ctermbg=234 sets background=light in some versions of vim
+        hi IndentGuidesOdd ctermfg=237 ctermbg=233
+        hi IndentGuidesEven ctermfg=239 ctermbg=235
 
-    " Better whitespace
-    hi ExtraWhitespace ctermfg=239 ctermbg=236
+        " Better whitespace
+        hi ExtraWhitespace ctermfg=239 ctermbg=236
 
-    " spelling
-    hi SpellBad   term=underline cterm=underline ctermfg=LightRed
-    hi SpellCap   term=underline cterm=underline ctermfg=Yellow
-    hi SpellRare  term=underline cterm=underline
-    hi SpellLocal term=underline cterm=underline
+        " spelling
+        hi SpellBad   term=underline cterm=underline ctermfg=LightRed
+        hi SpellCap   term=underline cterm=underline ctermfg=Yellow
+        hi SpellRare  term=underline cterm=underline
+        hi SpellLocal term=underline cterm=underline
 
-    if ! exists('g:colors_name')
-        " incidate that no theme was set?
-        let g:colors_name = '<none>'
+        if ! exists('g:colors_name')
+            " incidate that no theme was set?
+            let g:colors_name = '<none>'
+        endif
+        let g:colors_name = g:colors_name . '-custom'
+
+    elseif &background == "light"
+        hi Normal     ctermbg=254
+        hi NonText    ctermbg=253
+        " IndentGuides
+        " Setting ctermbg=234 sets background=light in some versions of vim
+        hi IndentGuidesOdd ctermfg=255 ctermbg=253
+        hi IndentGuidesEven ctermfg=253 ctermbg=255
+
+        " Better whitespace
+        hi ExtraWhitespace ctermfg=239 ctermbg=224
+
+        " spelling
+        hi SpellBad   term=underline cterm=underline ctermfg=DarkRed
+        hi SpellCap   term=underline cterm=underline ctermfg=DarkYellow
+        hi SpellRare  term=underline cterm=underline
+        hi SpellLocal term=underline cterm=underline
+
     endif
-    let g:colors_name = g:colors_name . '-custom'
 endfunction
 
 augroup custom_colors
@@ -58,7 +78,8 @@ call PathogenDisable('YouCompleteMe')
 " let g:markdown_fold_style = 'nested'
 
 " let g:colorscheme = 'xoria256'
-let g:colorscheme = 'one'
+call SetColorScheme('one')
+" let g:colorscheme = 'one'
 
 " let g:airline_theme='molokai'
 let g:airline_theme='onedark'

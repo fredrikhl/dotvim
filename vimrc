@@ -1,3 +1,4 @@
+set nocompatible
 runtime
             \ bundle.remote/vim-pathogen/autoload/pathogen.vim
             \ bundle/vim-pathogen/autoload/pathogen.vim
@@ -14,11 +15,16 @@ let s:presets = split($VIMPRESETS, ':')
 " This is how we set the colorscheme now.
 " This way, the colorscheme only gets set once, and we can set it to a
 " colorscheme before it is added to runtimepath.
-let g:colorscheme = "default"
+" let g:colorscheme = "default"
 
+function! SetColorScheme(colorscheme)
+    if !exists('g:colorscheme')
+        let g:colorscheme = a:colorscheme
+    endif
+endfunction
 
 " set colorscheme according to g:colorscheme
-function! s:set_colorscheme()
+function! s:load_colorscheme()
     if exists('g:colorscheme')
         execute "colorscheme " . g:colorscheme
     else
@@ -104,4 +110,4 @@ endif
 doautocmd User DotVimAfterPathogen
 
 
-call s:set_colorscheme()
+call s:load_colorscheme()
