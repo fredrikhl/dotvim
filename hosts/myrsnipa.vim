@@ -9,6 +9,7 @@ let g:paredit_leader = ","
 
 " basic settings
 set listchars=tab:⇥\ ,
+set printdevice=pullprint_Ricoh
 
 " custom colors / color fixes
 function! s:update_colors()
