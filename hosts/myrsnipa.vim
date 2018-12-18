@@ -9,7 +9,24 @@ let g:paredit_leader = ","
 
 " basic settings
 set listchars=tab:⇥\ ,
+
+function PrintExprCopy(fname)
+    call system('cp ' . a:fname . ' /tmp/vim.ps')
+    call delete(a:fname)
+    return v:shell_error
+endfunc
+
+function PrintExprGhostView(fname)
+    call system('ghostview ' . a:fname)
+    call delete(a:fname)
+    return v:shell_error
+endfunc
+
+" set printexpr=PrintExprCopy(v:fname_in)
+" set printexpr=PrintExprGhostView(v:fname_in)
 set printdevice=pullprint_Ricoh
+" left adjust from 10pc to 5pc should just about allow 80 chars + line numbers
+set printoptions=number:y,duplex:off,left:5pc
 
 " custom colors / color fixes
 function! s:update_colors()
