@@ -13,7 +13,7 @@ See [doc/dotvim.txt] for more info.
    ```
 2. Install [pandemic] and fetch bundles:
    ```bash
-   bash setup.py
+   bash setup.sh
    ```
 
 If you're interested in trying out this setup, you can also check out the repo
