@@ -62,15 +62,18 @@ augroup vimrc_hooks
     autocmd User DotVimAfterPathogen call s:noop()
 augroup END
 
-
 " Those pesky files...
-execute 'set undodir=' . join([s:root . '/.undo', '/tmp', '.'], ',')
-set undofile
-execute 'set backupdir=' . join([s:root . '/.backup', '/tmp', '.'], ',')
-set backup
-execute 'set directory=' . join([s:root . '/.swap//', '/tmp//', '.'], ',')
-execute 'set viminfo+=n' . s:root . '/.viminfo'
+let s:cache_undo = s:root . '/.undo'
+let s:cache_bkup = s:root . '/.backup'
+let s:cache_swap = s:root . '/.swap'
+let s:cache_info = s:root . '/.viminfo'
 
+let &undodir = join([s:cache_undo . '//', '/tmp//', '.'], ',')
+set undofile
+let &backupdir = join([s:cache_bkup . '//', '/tmp//', '.'], ',')
+set backup
+let &directory = join([s:cache_swap . '//', '/tmp//', '.'], ',')
+execute 'set viminfo+=n' . s:cache_info
 
 " Load common configs
 for config in split(globpath(s:confdir, '*.vim'), '\n')
