@@ -6,13 +6,16 @@
 # 2. Installs/updates all bundles in `pandemic-bundles` with pandemic
 #
 
-PANDEMIC_SOURCE='git+https://github.com/jwcxz/vim-pandemic.git#egg=Pandemic'
+# PANDEMIC_SOURCE='git+https://github.com/jwcxz/vim-pandemic.git#egg=Pandemic'
+PANDEMIC_SOURCE='git+https://github.com/fredrikhl/vim-pandemic.git#egg=Pandemic'
+# MAKE_VENV='virtualenv'
+MAKE_VENV='python3 -m venv'
 
 die() { >&2 echo "ERROR: $*"; exit 1; }
 
 [ -d .env ] || die "no virtualenv dir, check \$PWD"
 if [ ! -e .env/bin/activate ]; then
-    virtualenv .env || die "cannot setup virtualenv"
+    $MAKE_VENV .env || die "cannot setup virtualenv"
 fi
 
 .env/bin/pip install -U "$PANDEMIC_SOURCE" || die "Unable to install pandemic"
