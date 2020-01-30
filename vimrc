@@ -5,10 +5,10 @@ runtime
             \ autoload/pathogen.vim
 
 " path: directory where this file resides (with symlinks resolved)
-let s:root = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-let s:confdir = s:root . '/common'
-let s:hostdir = s:root . '/hosts'
-let s:presetdir = s:root . '/presets'
+let g:vimroot = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let s:confdir = g:vimroot . '/common'
+let s:hostdir = g:vimroot . '/hosts'
+let s:presetdir = g:vimroot . '/presets'
 
 let s:presets = split($VIMPRESETS, ':')
 
@@ -63,10 +63,10 @@ augroup vimrc_hooks
 augroup END
 
 " Those pesky files...
-let s:cache_undo = s:root . '/.undo'
-let s:cache_bkup = s:root . '/.backup'
-let s:cache_swap = s:root . '/.swap'
-let s:cache_info = s:root . '/.viminfo'
+let s:cache_undo = g:vimroot . '/.undo'
+let s:cache_bkup = g:vimroot . '/.backup'
+let s:cache_swap = g:vimroot . '/.swap'
+let s:cache_info = g:vimroot . '/.viminfo'
 
 let &undodir = join([s:cache_undo . '//', '/tmp//', '.'], ',')
 set undofile
@@ -101,11 +101,11 @@ doautocmd User DotVimBeforePathogen
 
 " run pathogen infect to populate the runtime path
 if exists('*pathogen#infect()')
-    if isdirectory(s:root . '/bundle')
-        call pathogen#infect(s:root . '/bundle/{}')
+    if isdirectory(g:vimroot . '/bundle')
+        call pathogen#infect(g:vimroot . '/bundle/{}')
     endif
-    if isdirectory(s:root . '/bundle.remote')
-        call pathogen#infect(s:root . '/bundle.remote/{}')
+    if isdirectory(g:vimroot . '/bundle.remote')
+        call pathogen#infect(g:vimroot . '/bundle.remote/{}')
     endif
 endif
 

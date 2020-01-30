@@ -43,19 +43,23 @@ endfunction
 "
 " to revert to any settings that were set before the call
 "
-call s:set_default('python2_python', 'python')
-call s:set_default('python2_flake8', 'flake8')
-call s:set_default('python2_pyflakes', 'pyflakes')
-call s:set_default('python2_pep8', 'pep8')
-call s:set_default('python2_pycodestyle', 'pycodestyle')
-call s:set_default('python2_pylint', 'pylint')
 
-call s:set_default('python3_python', 'python3')
-call s:set_default('python3_flake8', 'python3-flake8')
-call s:set_default('python3_pyflakes', 'python3-pyflakes')
-call s:set_default('python3_pep8', 'python3-pep8')
-call s:set_default('python3_pycodestyle', 'python3-pycodestyle')
-call s:set_default('python3_pylint', 'python3-pylint')
+let s:py2bin = g:vimroot . '/.py2-env/bin/'
+let s:py3bin = g:vimroot . '/.py3-env/bin/'
+
+call s:set_default('python2_python', s:py2bin . 'python')
+call s:set_default('python2_flake8', s:py2bin . 'flake8')
+call s:set_default('python2_pyflakes', s:py2bin . 'pyflakes')
+call s:set_default('python2_pep8', s:py2bin . s:py2bin . 'pep8')
+call s:set_default('python2_pycodestyle', s:py2bin . 'pycodestyle')
+call s:set_default('python2_pylint', s:py2bin . 'pylint')
+
+call s:set_default('python3_python', s:py3bin . 'python')
+call s:set_default('python3_flake8', s:py3bin . 'flake8')
+call s:set_default('python3_pyflakes', s:py3bin . 'pyflakes')
+call s:set_default('python3_pep8', s:py3bin . s:py3bin . 'pep8')
+call s:set_default('python3_pycodestyle', s:py3bin . 'pycodestyle')
+call s:set_default('python3_pylint', s:py3bin . 'pylint')
 
 
 " TODO: Move to syntastic config?

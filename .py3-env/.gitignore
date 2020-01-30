@@ -1,0 +1,5 @@
+# This folder should hold a py3 venv
+# It's used for pandemic, and for python3 syntastic utils
+
+*
+!.gitignore

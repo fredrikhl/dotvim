@@ -1,0 +1,5 @@
+# This folder should hold a py2 venv
+# It's used for python2 syntastic utils
+
+*
+!.gitignore

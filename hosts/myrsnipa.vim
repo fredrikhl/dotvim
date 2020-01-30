@@ -3,7 +3,8 @@
 "
 
 " Leader, different vim, different keyboard
-let mapleader = "|"
+" let mapleader = "|"
+let mapleader = "`"
 let g:slimv_leader = ","
 let g:paredit_leader = ","
 
@@ -104,8 +105,8 @@ let g:airline_theme='onedark'
 
 " do not use pylint
 let g:syntastic_python_checkers = ['python', 'flake8']
-let g:py_python2_flake8 = 'flake8-2.7'
-let g:py_python3_flake8 = 'flake8-3.6'
+" let g:py_python2_flake8 = 'flake8'
+" let g:py_python3_flake8 = 'flake8-3'
 " use python2 by default
 call py#set_py2()
 

@@ -1,5 +1,0 @@
-# This folder is intended to hold a virtualenv for 'pandemic'. Nothing here
-# should be tracked.
-
-*
-!.gitignore
