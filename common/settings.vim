@@ -6,7 +6,7 @@
 "
 "   We want messages and menus in English, regardless of the locale.
 "
-language en_US
+language en_US.utf8
 set langmenu=en_US.UTF-8
 
 
