@@ -1,5 +1,5 @@
 "
-" myrsnipa.uio.no config
+" beef config
 "
 
 " Leader, different vim, different keyboard
@@ -89,7 +89,7 @@ call SetColorScheme('one')
 let g:airline_theme='onedark'
 
 let g:syntastic_python_checkers = ['python', 'flake8']
-" call py#set_py2()
+call py#set_py2()
 
 " php: quiet tab warnings for files that uses tabs
 let g:syntastic_php_phpcs_quiet_messages = { "regex": "Spaces must be used .*; tabs are not allowed" }
