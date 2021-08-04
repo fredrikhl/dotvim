@@ -42,8 +42,8 @@ function! s:update_colors()
 
         " IndentGuides
         " Setting ctermbg=234 sets background=light in some versions of vim
-        hi IndentGuidesOdd ctermfg=237 ctermbg=233
-        hi IndentGuidesEven ctermfg=239 ctermbg=235
+        hi IndentGuidesOdd ctermfg=239 ctermbg=235
+        hi IndentGuidesEven ctermfg=237 ctermbg=234
 
         " Better whitespace
         hi ExtraWhitespace ctermfg=239 ctermbg=236
