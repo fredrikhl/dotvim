@@ -9,21 +9,13 @@
 # PANDEMIC_SOURCE='git+https://github.com/jwcxz/vim-pandemic.git#egg=Pandemic'
 PANDEMIC_SOURCE='git+https://github.com/fredrikhl/vim-pandemic.git#egg=Pandemic'
 
-die() { >&2 echo "ERROR: $*"; exit 1; }
+die() {
+    >&2 echo "ERROR: $*"
+    exit 1
+}
 
-[ -d .py3-env ] || die "no py3-env dir, check \$PWD"
-if [ ! -e .py3-env/bin/activate ]; then
-    virtualenv -p python3 .py3-env || die "cannot setup py3 env"
-fi
-
-.py3-env/bin/pip install -U "$PANDEMIC_SOURCE" || die "Unable to install pandemic"
-.py3-env/bin/pandemic update || die "Unable to update packages"
-
-# update helptags with pathogen
-vim -c Helptags -c quit
-
-# install python linter utils
-read -r -d '' PY_REQS << EOF
+# Common python utils for python 2 and 3
+read -r -d '' PY_UTILS << EOF
 flake8
 # flake8-pep257
 pep8-naming
@@ -31,14 +23,30 @@ pep8
 pylint
 EOF
 
-.py3-env/bin/pip install -U -r <( echo "$PY_REQS" ) || die "Unable to install utils"
+# python 3 env
+[ -d .py3-env ] || die "no py3-env dir, check \$PWD"
+if [ ! -e .py3-env/bin/activate ]; then
+    virtualenv -p python3 .py3-env || die "cannot setup py3 env"
+fi
 
-# Repeat for py2
+.py3-env/bin/pip install -U pip || die "Unable to upgrade pip - venv broken?"
+.py3-env/bin/pip install -U -r <( echo "$PY_UTILS" ) || die "Unable to install utils"
 
-# make py2/py3 envs
+
+# python 2 env
 [ -d .py2-env ] || die "no py2-env dir, check \$PWD"
 if [ ! -e .py2-env/bin/activate ]; then
     virtualenv -p python2 .py2-env || die "cannot setup py2 env"
 fi
 
-.py2-env/bin/pip install -U -r <( echo "$PY_REQS" ) || die "Unable to install utils"
+# pip 21 will drop python 2 support
+.py2-env/bin/pip install -U 'pip<21' || die "Unable to upgrade pip - venv broken?"
+.py2-env/bin/pip install -U -r <( echo "$PY_UTILS" ) || die "Unable to install utils"
+
+
+# Install or upgrade pandemic
+.py3-env/bin/pip install -U "$PANDEMIC_SOURCE" || die "Unable to install pandemic"
+.py3-env/bin/pandemic update || die "Unable to update packages"
+
+# update helptags with pathogen
+vim -c Helptags -c quit
