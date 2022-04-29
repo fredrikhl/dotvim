@@ -61,7 +61,7 @@ source = https://github.com/ervandew/supertab.git
 type = git
 
 [tagbar]
-source = git://github.com/majutsushi/tagbar.git
+source = https://github.com/preservim/tagbar.git
 type = git
 
 # [taglist.vim]
