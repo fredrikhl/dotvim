@@ -1,13 +1,8 @@
 " Configure python binaries for syntastic
 "
-" This is a hack that lets us swap the python binaries.
-
-function! s:set_default(varname, default)
-    let l:varname = 'g:py_' . a:varname
-    if !exists(l:varname)
-        let {l:varname} = a:default
-    endif
-endfunction
+" This autoload script lets us quickly set groups of python scripts available to
+" syntastic when linting python files.
+"
 
 " TODO:
 " Provide custom IsAvailable functions, so we can change the executables to
@@ -19,20 +14,39 @@ endfunction
 "       endif
 "       return syntastic#util#versionIsAtLeast(self.getVersion(), [2, 6])
 "   endfunction
+"
+
+let s:py2bin = g:vimroot . '/.py2-env/bin/'
+let s:py2env = {
+    \ 'python': s:py2bin . 'python',
+    \ 'flake8': s:py2bin . 'flake8',
+    \ 'pyflakes': s:py2bin . 'pyflakes',
+    \ 'pep8': s:py2bin . s:py2bin . 'pep8',
+    \ 'pycodestyle': s:py2bin . 'pycodestyle',
+    \ 'pylint': s:py2bin . 'pylint',
+    \ }
+
+let s:py3bin = g:vimroot . '/.py3-env/bin/'
+let s:py3env = {
+    \ 'python': s:py3bin . 'python',
+    \ 'flake8': s:py3bin . 'flake8',
+    \ 'pyflakes': s:py3bin . 'pyflakes',
+    \ 'pep8': s:py3bin . 'pep8',
+    \ 'pycodestyle': s:py3bin . 'pycodestyle',
+    \ 'pylint': s:py3bin . 'pylint',
+    \ }
 
 
 " TODO:
+"
 " Make all this into a dict, so we can have an arbitrary amount of
 " named setups:
 "
-"   py_versions = {
-"     py2 = {
-"       python = python2,
-"       flake8 = flake8-2.7,
-"     },
-"     py3 = { ...},
-"   }
-"
+" let s:envs = {
+"     \ 'py2': s:py2env,
+"     \ 'py3': s:py3env,
+"     \ }
+
 " And can swap with a single function call:
 "
 "   call py#set_version('py2')
@@ -42,52 +56,43 @@ endfunction
 "   call py#clear_version()
 "
 " to revert to any settings that were set before the call
+
+
+let s:items = ['python', 'flake8', 'pyflakes', 'pep8', 'pycodestyle', 'pylint']
+
+
+" clear all g:syntastic_python_<item>_exec globals
+function! s:clear_env()
+    for item in s:items
+        let l:syntastic_name = 'g:syntastic_python_' . l:item . '_exec'
+        unlet {l:syntastic_name}
+    endfor
+endfunction
+
+
+" set or clear g:syntastic_python_<item>_exec globals from a:env
+function! s:set_env(env)
+    for item in s:items
+        let l:syntastic_name = 'g:syntastic_python_' . l:item . '_exec'
+        if has_key(a:env, l:item)
+            let {l:syntastic_name} = a:env[l:item]
+        else
+            unlet {l:syntastic_name}
+        endif
+    endfor
+endfunction
+
+
+" update g:syntastic_python_<item>_exec globals with a:env
 "
-
-let s:py2bin = g:vimroot . '/.py2-env/bin/'
-let s:py3bin = g:vimroot . '/.py3-env/bin/'
-
-call s:set_default('python2_python', s:py2bin . 'python')
-call s:set_default('python2_flake8', s:py2bin . 'flake8')
-call s:set_default('python2_pyflakes', s:py2bin . 'pyflakes')
-call s:set_default('python2_pep8', s:py2bin . s:py2bin . 'pep8')
-call s:set_default('python2_pycodestyle', s:py2bin . 'pycodestyle')
-call s:set_default('python2_pylint', s:py2bin . 'pylint')
-
-call s:set_default('python3_python', s:py3bin . 'python')
-call s:set_default('python3_flake8', s:py3bin . 'flake8')
-call s:set_default('python3_pyflakes', s:py3bin . 'pyflakes')
-call s:set_default('python3_pep8', s:py3bin . s:py3bin . 'pep8')
-call s:set_default('python3_pycodestyle', s:py3bin . 'pycodestyle')
-call s:set_default('python3_pylint', s:py3bin . 'pylint')
-
-
-" TODO: Move to syntastic config?
-function! s:set_py2()
-    let g:syntastic_python_python_exec = g:py_python2_python
-    let g:syntastic_python_flake8_exec = g:py_python2_flake8
-    let g:syntastic_python_pyflakes_exec = g:py_python2_pyflakes
-    let g:syntastic_python_pep8_exec = g:py_python2_pep8
-    let g:syntastic_python_pycodestyle_exec = g:py_python2_pycodestyle
-    let g:syntastic_python_pylint_exec = g:py_python2_pylint
-endfunction
-
-function! s:set_py3()
-    let g:syntastic_python_python_exec = g:py_python3_python
-    let g:syntastic_python_flake8_exec = g:py_python3_flake8
-    let g:syntastic_python_pyflakes_exec = g:py_python3_pyflakes
-    let g:syntastic_python_pep8_exec = g:py_python3_pep8
-    let g:syntastic_python_pycodestyle_exec = g:py_python3_pycodestyle
-    let g:syntastic_python_pylint_exec = g:py_python3_pylint
-endfunction
-
-function! s:unset_py()
-    unlet g:syntastic_python_python_exec
-    unlet g:syntastic_python_flake8_exec
-    unlet g:syntastic_python_pyflakes_exec
-    unlet g:syntastic_python_pep8_exec
-    unlet g:syntastic_python_pycodestyle_exec
-    unlet g:syntastic_python_pylint_exec
+" Like s:set_env, but doesnt unlet any s:items missing from a:env
+function! s:update_env(env)
+    for item in s:items
+        let l:syntastic_name = 'g:syntastic_python_' . l:item . '_exec'
+        if has_key(a:env, l:item)
+            let {l:syntastic_name} = a:env[l:item]
+        endif
+    endfor
 endfunction
 
 
@@ -96,9 +101,9 @@ endfunction
 
 augroup set_python
     autocmd!
-    autocmd User SetPython2 call s:set_py2()
-    autocmd User SetPython3 call s:set_py3()
-    autocmd User UnsetPython call s:unset_py()
+    autocmd User SetPython2 call s:set_env(s:py2env)
+    autocmd User SetPython3 call s:set_env(s:py3env)
+    autocmd User UnsetPython call s:clear_env()
 augroup END
 
 
