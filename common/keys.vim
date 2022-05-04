@@ -51,6 +51,8 @@ function! s:setup_leader_binds()
     " vim-or-vigor #4 jet pack
     " list buffer and prepare to change
     nnoremap <leader>b :ls<CR>:buffer<space>
+
+    nnoremap <leader>c :set invpaste<CR>
 endfunction
 
 
