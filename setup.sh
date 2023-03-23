@@ -22,10 +22,11 @@ pep8-naming
 pep8
 pylint
 EOF
+
 read -r -d '' PY2_UTILS << EOF
 flake8
 # flake8-pep257
-pep8-naming ~= 0.12
+pep8-naming ~= 0.12.1
 pep8
 pylint
 EOF
