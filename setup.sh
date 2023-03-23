@@ -15,10 +15,17 @@ die() {
 }
 
 # Common python utils for python 2 and 3
-read -r -d '' PY_UTILS << EOF
+read -r -d '' PY3_UTILS << EOF
 flake8
 # flake8-pep257
 pep8-naming
+pep8
+pylint
+EOF
+read -r -d '' PY2_UTILS << EOF
+flake8
+# flake8-pep257
+pep8-naming ~= 0.12
 pep8
 pylint
 EOF
@@ -30,7 +37,7 @@ if [ ! -e .py3-env/bin/activate ]; then
 fi
 
 .py3-env/bin/pip install -U pip || die "Unable to upgrade pip - venv broken?"
-.py3-env/bin/pip install -U -r <( echo "$PY_UTILS" ) || die "Unable to install utils"
+.py3-env/bin/pip install -U -r <( echo "$PY3_UTILS" ) || die "Unable to install utils"
 
 
 # python 2 env
@@ -41,7 +48,7 @@ fi
 
 # pip 21 will drop python 2 support
 .py2-env/bin/pip install -U 'pip<21' || die "Unable to upgrade pip - venv broken?"
-.py2-env/bin/pip install -U -r <( echo "$PY_UTILS" ) || die "Unable to install utils"
+.py2-env/bin/pip install -U -r <( echo "$PY2_UTILS" ) || die "Unable to install utils"
 
 
 # Install or upgrade pandemic
