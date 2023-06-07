@@ -184,6 +184,10 @@ type = git
 source = https://github.com/nanotech/jellybeans.vim.git
 type = git
 
+[papercolor-theme]
+source = https://github.com/NLKNguyen/papercolor-theme.git
+type = git
+
 [molokai]
 source = https://github.com/tomasr/molokai.git
 type = git
