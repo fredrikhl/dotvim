@@ -2,3 +2,5 @@
 .viminfo
 doc/tags
 spell/
+.py2-env/
+.py3-env/

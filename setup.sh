@@ -32,7 +32,7 @@ pylint
 EOF
 
 # python 3 env
-[ -d .py3-env ] || die "no py3-env dir, check \$PWD"
+mkdir -vp .py3-env
 if [ ! -e .py3-env/bin/activate ]; then
     virtualenv -p python3 .py3-env || die "cannot setup py3 env"
 fi
@@ -42,7 +42,7 @@ fi
 
 
 # python 2 env
-[ -d .py2-env ] || die "no py2-env dir, check \$PWD"
+mkdir -vp .py2-env
 if [ ! -e .py2-env/bin/activate ]; then
     virtualenv -p python2 .py2-env || die "cannot setup py2 env"
 fi
