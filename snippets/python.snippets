@@ -1,0 +1,14 @@
+snippet pyscript
+	import argparse
+	import logging
+
+	logger = logging.getLogger(__name__)
+
+
+	def main(argv=None):
+		parser = argparse.ArgumentParser()
+		args = parser.parse_args(argv)
+
+
+	if __name__ == "__main__":
+		main()

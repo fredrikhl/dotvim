@@ -52,9 +52,13 @@ type = git
 source = https://github.com/osyo-manga/vim-over.git
 type = git
 
-# [vim-snipmate]
-# source = https://github.com/garbas/vim-snipmate.git
-# type = git
+[vim-addon-mw-utils]
+source = https://github.com/MarcWeber/vim-addon-mw-utils.git
+type = git
+
+[vim-snipmate]
+source = https://github.com/garbas/vim-snipmate.git
+type = git
 
 [supertab]
 source = https://github.com/ervandew/supertab.git
@@ -98,67 +102,86 @@ type = git
 source = https://github.com/kylef/apiblueprint.vim.git
 type = git
 
+# coffee script (https://coffeescript.org/)
 [vim-coffee-script]
 source = https://github.com/kchmck/vim-coffee-script.git
 type = git
 
-[csv.vim]
-source = https://github.com/chrisbra/csv.vim.git
-type = git
+# csv
+# [csv.vim]
+# source = https://github.com/chrisbra/csv.vim.git
+# type = git
 
+# elm (https://elm-lang.org/)
 [elm-vim]
 source = https://github.com/ElmCast/elm-vim.git
 type = git
 
+# Jenkinsfile
 [jenkinsfile-vim-syntax]
 source = https://github.com/martinda/Jenkinsfile-vim-syntax.git
 type = git
 
+# Jinja2 (.j2)
 [vim-jinja]
 source = https://github.com/lepture/vim-jinja.git
 type = git
 
-[vim-less]
 # less-css
+[vim-less]
 source = https://github.com/groenewege/vim-less.git
 type = git
 
+# logstash config
 [logstash.vim]
 source = https://github.com/robbles/logstash.vim.git
 type = git
 
+# typescript (https://typescriptlang.org/)
 [typescript-vim]
 source = https://github.com/leafgarland/typescript-vim.git
 type = git
 
-[requirements.txt]
-source = https://github.com/raimon49/requirements.txt.vim.git
-type = git
-
+# markdown
 [vim-markdown]
 source = https://github.com/tpope/vim-markdown.git
 type = git
 
+# markdown fold support
 [vim-markdown-folding]
 source = https://github.com/nelstrom/vim-markdown-folding.git
 type = git
 
+# mediawiki / wikipedia markup
 [mediawiki.vim]
 source = https://github.com/chikamichi/mediawiki.vim.git
 type = git
 
+# powershell
 [vim-ps1]
 source = https://github.com/PProvost/vim-ps1.git
 type = git
 
+# pep8 indent syntax rules
 [vim-python-pep8-indent]
 source = https://github.com/hynek/vim-python-pep8-indent.git
 type = git
 
+# requirements.txt
+[requirements.txt]
+source = https://github.com/raimon49/requirements.txt.vim.git
+type = git
+
+[rust.vim]
+source = https://github.com/rust-lang/rust.vim.git
+type = git
+
+# toml
 [vim-toml]
 source = https://github.com/cespare/vim-toml.git
 type = git
 
+# vimperator config
 [vimperator]
 source = https://github.com/superbrothers/vim-vimperator.git
 type = git
